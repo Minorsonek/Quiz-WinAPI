@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1494485842 source:e:\c++ applications\quiz\main.cpp
+	<tchar.h>
+	<windows.h>
+	<fstream>
+	<cstdlib>
+	<ctime>
+	<sstream>
+	<string>
+	<vector>
+
+1490257884 source:k:\c++ applications\quiz\main.cpp
+	<tchar.h>
+	<windows.h>
+	<fstream>
+	<cstdlib>
+	<ctime>
+	<sstream>
+
