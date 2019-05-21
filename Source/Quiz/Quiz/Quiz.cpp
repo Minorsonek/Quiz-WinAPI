@@ -97,8 +97,8 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
 		hThisInstance,       /* Program Instance handler */
 		NULL                 /* No Window Creation data */
 	);
-	/* Preparation before showing window */
 
+	/* Preparation before showing window */
 	UI = &UIElements::GetInstance(hwnd, hThisInstance);
 
 	SetWindowTextA((*UI).hStaticUserName, LPSTR("Podpisz sie tutaj"));
@@ -148,9 +148,10 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 		PostQuitMessage(0);       /* send a WM_QUIT to the message queue */
 		break;
 	case WM_COMMAND:
-		if ((HWND)lParam == (*UI).hButtonA || (HWND)lParam == (*UI).hButtonB ||
-			(HWND)lParam == (*UI).hButtonC || (HWND)lParam == (*UI).hButtonD ||
-			(HWND)lParam == (*UI).hButtonStart || (HWND)lParam == (*UI).hButtonHelp)
+		HWND lParamAsHWND = (HWND)lParam;
+		if (lParamAsHWND == (*UI).hButtonA || lParamAsHWND == (*UI).hButtonB ||
+			lParamAsHWND == (*UI).hButtonC || lParamAsHWND == (*UI).hButtonD ||
+			lParamAsHWND == (*UI).hButtonStart || lParamAsHWND == (*UI).hButtonHelp)
 		{
 			switch (wParam)
 			{
