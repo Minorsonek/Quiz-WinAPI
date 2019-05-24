@@ -15,14 +15,17 @@ UIElements::UIElements(HWND& hwnd, HINSTANCE& currentInstance)
 		600, 400, 100, 100, hwnd, (HMENU)ID_BUTTOND, currentInstance, NULL);
 
 	hButtonStart = CreateWindowExA(WS_EX_CLIENTEDGE, LPSTR("BUTTON"), LPSTR("Start"), WS_CHILD | WS_VISIBLE,
-		700, 100, 80, 150, hwnd, (HMENU)ID_BUTTONSTART, currentInstance, NULL);
+		680, 100, 90, 150, hwnd, (HMENU)ID_BUTTONSTART, currentInstance, NULL);
 
 	hButtonHelp = CreateWindowExA(WS_EX_CLIENTEDGE, LPSTR("BUTTON"), LPSTR("Pomoc"), WS_CHILD | WS_VISIBLE,
-		20, 180, 80, 150, hwnd, (HMENU)ID_BUTTONHELP, currentInstance, NULL);
+		30, 180, 90, 150, hwnd, (HMENU)ID_BUTTONHELP, currentInstance, NULL);
 
 	hTextUserName = CreateWindowExA(WS_EX_CLIENTEDGE, LPSTR("EDIT"), NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_MULTILINE,
 		150, 350, 300, 30, hwnd, NULL, currentInstance, NULL);
 
+
+	hStaticTitle = CreateWindowExA(0, LPSTR("STATIC"), NULL, WS_CHILD | WS_VISIBLE |
+		SS_CENTER, 150, 20, 500, 40, hwnd, NULL, currentInstance, NULL);
 
 	hStaticQuestion = CreateWindowExA(0, LPSTR("STATIC"), NULL, WS_CHILD | WS_VISIBLE |
 		SS_CENTER, 150, 80, 500, 150, hwnd, NULL, currentInstance, NULL);
@@ -47,6 +50,16 @@ UIElements::UIElements(HWND& hwnd, HINSTANCE& currentInstance)
 
 	hStaticQuestionNumber = CreateWindowExA(0, LPSTR("STATIC"), NULL, WS_CHILD | WS_VISIBLE |
 		SS_CENTER, 30, 70, 60, 60, hwnd, NULL, currentInstance, NULL);
+
+
+	SetWindowTextA(hStaticTitle, LPSTR("QUIZ"));
+	SetWindowTextA(hStaticUserName, LPSTR("Podpisz sie tutaj"));
+	SetWindowTextA(hStaticQuestionNumberTitle, LPSTR("Numer Pytania"));
+
+	HFONT hFont = CreateFont(32, 0, 0, 0, 700, FALSE, TRUE, FALSE, ANSI_CHARSET,
+		OUT_TT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, TEXT("Tahoma"));
+	SendMessage(hStaticTitle, WM_SETFONT, (WPARAM)hFont, (LPARAM)MAKELONG(TRUE, 0));
 }
 
 

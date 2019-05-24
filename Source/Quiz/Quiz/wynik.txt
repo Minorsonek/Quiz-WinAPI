@@ -1,7 +1,7 @@
-Imie i Nazwisko:	dasdsada
+Imie i Nazwisko:	DASDASDAS
 Numer pytania		 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 
 Poprawna ODP		 D  D  D  A  A  D  B  D  A  C  A  B  B  B  C  D  A  C  D 
-Uzyskana ODP		 B  C  B  C  B  C  B  C  B  C  B  B  B  C  B  C  B  C  B 
+Uzyskana ODP		 B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B 
 Punkty do zdobycia:	 2  3  2  4  4  2  1  5  2  3  4  2  4  3  5  6  1  2  4 
 
-Ilosc zdobytych punktow: 12
+Ilosc zdobytych punktow: 10

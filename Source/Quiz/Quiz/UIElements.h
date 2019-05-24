@@ -22,6 +22,7 @@ public:
 	HWND hTextUserName;
 
 	// Labels
+	HWND hStaticTitle;
 	HWND hStaticQuestion;
 	HWND hStaticUserName;
 	HWND hStaticA;
