@@ -83,12 +83,12 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
 	/* Make the window visible on the screen */
 	FreeConsole();
 	ShowWindow(hwnd, nCmdShow);
-	ShowWindow((*UI).hStaticQuestionNumberTitle, SW_HIDE);
-	ShowWindow((*UI).hStaticQuestionNumber, SW_HIDE);
-	ShowWindow((*UI).hButtonA, SW_HIDE);
-	ShowWindow((*UI).hButtonB, SW_HIDE);
-	ShowWindow((*UI).hButtonC, SW_HIDE);
-	ShowWindow((*UI).hButtonD, SW_HIDE);
+	ShowWindow(UI->hStaticQuestionNumberTitle, SW_HIDE);
+	ShowWindow(UI->hStaticQuestionNumber, SW_HIDE);
+	ShowWindow(UI->hButtonA, SW_HIDE);
+	ShowWindow(UI->hButtonB, SW_HIDE);
+	ShowWindow(UI->hButtonC, SW_HIDE);
+	ShowWindow(UI->hButtonD, SW_HIDE);
 	MessageBoxA(NULL, LPSTR("Witam w Quizie!.\nAby rozpoczac, kliknij przycisk \"Start\".\nWyswietli sie wtedy pytanie, aby odpowiedziec kliknij jeden z przyciskow A B C D.\n\nProgram by Patryk Mikulski\nAll rights reserved."), LPSTR("Help"), MB_ICONEXCLAMATION);
 
 	/* Run the message loop. It will run until GetMessage() returns 0 */
@@ -117,44 +117,44 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_COMMAND:
 	{
 		HWND lParamAsHWND = (HWND)lParam;
-		if (lParamAsHWND == (*UI).hButtonA || lParamAsHWND == (*UI).hButtonB ||
-			lParamAsHWND == (*UI).hButtonC || lParamAsHWND == (*UI).hButtonD ||
-			lParamAsHWND == (*UI).hButtonStart || lParamAsHWND == (*UI).hButtonHelp)
+		if (lParamAsHWND == UI->hButtonA || lParamAsHWND == UI->hButtonB ||
+			lParamAsHWND == UI->hButtonC || lParamAsHWND == UI->hButtonD ||
+			lParamAsHWND == UI->hButtonStart || lParamAsHWND == UI->hButtonHelp)
 		{
 			switch (wParam)
 			{
 			case ID_BUTTONA:
-				(*QuestionH).AnswerClick('A');
+				QuestionH->AnswerClick('A');
 				HandleAnswerButtonClick();
 				break;
 			case ID_BUTTONB:
-				(*QuestionH).AnswerClick('B');
+				QuestionH->AnswerClick('B');
 				HandleAnswerButtonClick();
 				break;
 			case ID_BUTTONC:
-				(*QuestionH).AnswerClick('C');
+				QuestionH->AnswerClick('C');
 				HandleAnswerButtonClick();
 				break;
 			case ID_BUTTOND:
-				(*QuestionH).AnswerClick('D');
+				QuestionH->AnswerClick('D');
 				HandleAnswerButtonClick();
 				break;
 
 			case ID_BUTTONSTART:
 			{
-				if ((*QuestionH).userScore == -1)
-				{
-					(*QuestionH).CountQuestions();
+				if (QuestionH->userScore == -1)
+				{			 
+					QuestionH->CountQuestions();
 					HandleAnswerButtonClick();
-					(*QuestionH).userScore++;
-					ShowWindow((*UI).hButtonA, SW_SHOW);
-					ShowWindow((*UI).hButtonB, SW_SHOW);
-					ShowWindow((*UI).hButtonC, SW_SHOW);
-					ShowWindow((*UI).hButtonD, SW_SHOW);
-					ShowWindow((*UI).hStaticQuestionNumber, SW_SHOW);
-					ShowWindow((*UI).hStaticQuestionNumberTitle, SW_SHOW);
-					SetWindowTextA((*UI).hButtonStart, LPSTR("Powodzenia"));
-					SetWindowTextA((*UI).hStaticQuestionNumber, LPSTR(ToString((*QuestionH).currentQuestionIndex).c_str()));
+					QuestionH->userScore++;
+					ShowWindow(UI->hButtonA, SW_SHOW);
+					ShowWindow(UI->hButtonB, SW_SHOW);
+					ShowWindow(UI->hButtonC, SW_SHOW);
+					ShowWindow(UI->hButtonD, SW_SHOW);
+					ShowWindow(UI->hStaticQuestionNumber, SW_SHOW);
+					ShowWindow(UI->hStaticQuestionNumberTitle, SW_SHOW);
+					SetWindowTextA(UI->hButtonStart, LPSTR("Powodzenia"));
+					SetWindowTextA(UI->hStaticQuestionNumber, LPSTR(ToString(QuestionH->currentQuestionIndex).c_str()));
 				}
 				else
 				{
@@ -178,33 +178,33 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 
 void HandleAnswerButtonClick()
 {
-	if ((*QuestionH).CheckTestFinished())
+	if (QuestionH->CheckTestFinished())
 	{
 		FinishQuiz();
 	}
 
-	SetWindowTextA((*UI).hStaticQuestion, LPSTR((*QuestionH).currentQuestionTask.c_str()));
-	SetWindowTextA((*UI).hStaticA, LPSTR((*QuestionH).currentQuestionAnswerA.c_str()));
-	SetWindowTextA((*UI).hStaticB, LPSTR((*QuestionH).currentQuestionAnswerB.c_str()));
-	SetWindowTextA((*UI).hStaticC, LPSTR((*QuestionH).currentQuestionAnswerC.c_str()));
-	SetWindowTextA((*UI).hStaticD, LPSTR((*QuestionH).currentQuestionAnswerD.c_str()));
-	SetWindowTextA((*UI).hStaticQuestionNumber, LPSTR(ToString((*QuestionH).currentQuestionIndex).c_str()));
+	SetWindowTextA(UI->hStaticQuestion, LPSTR(QuestionH->currentQuestionTask.c_str()));
+	SetWindowTextA(UI->hStaticA, LPSTR(QuestionH->currentQuestionAnswerA.c_str()));
+	SetWindowTextA(UI->hStaticB, LPSTR(QuestionH->currentQuestionAnswerB.c_str()));
+	SetWindowTextA(UI->hStaticC, LPSTR(QuestionH->currentQuestionAnswerC.c_str()));
+	SetWindowTextA(UI->hStaticD, LPSTR(QuestionH->currentQuestionAnswerD.c_str()));
+	SetWindowTextA(UI->hStaticQuestionNumber, LPSTR(ToString(QuestionH->currentQuestionIndex).c_str()));
 }
 
 void FinishQuiz()
 {
-	string points = ToString((*QuestionH).userScore);
+	string points = ToString(QuestionH->userScore);
 
-	DWORD dwSize = GetWindowTextLength((*UI).hTextUserName) + 1;
+	DWORD dwSize = GetWindowTextLength(UI->hTextUserName) + 1;
 	Buffer1 = (LPSTR)GlobalAlloc(GPTR, dwSize + 1);
-	GetWindowTextA((*UI).hTextUserName, Buffer1, dwSize);
+	GetWindowTextA(UI->hTextUserName, Buffer1, dwSize);
 
-	ShowWindow((*UI).hButtonA, SW_HIDE);
-	ShowWindow((*UI).hButtonB, SW_HIDE);
-	ShowWindow((*UI).hButtonC, SW_HIDE);
-	ShowWindow((*UI).hButtonD, SW_HIDE);
+	ShowWindow(UI->hButtonA, SW_HIDE);
+	ShowWindow(UI->hButtonB, SW_HIDE);
+	ShowWindow(UI->hButtonC, SW_HIDE);
+	ShowWindow(UI->hButtonD, SW_HIDE);
 
-	(*QuestionH).SaveScore(Buffer1);
+	QuestionH->SaveScore(Buffer1);
 
 	string message = "Koniec, zdobyles/as " + points + " punkty/ow!";
 	MessageBoxA(NULL, LPSTR(message.c_str()), LPSTR("Zakonczenie"), MB_ICONEXCLAMATION);

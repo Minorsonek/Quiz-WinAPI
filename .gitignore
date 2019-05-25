@@ -1,3 +1,9 @@
 Source/Quiz/.vs/
 Source/Quiz/Debug/
 Source/Quiz/Quiz/Debug/
+Source/Quiz/GoogleTest/Debug/
+Source/Quiz/GoogleTest/Release/
+Source/Quiz/Quiz.Tests/Debug/
+Source/Quiz/Quiz.Tests/Release/
+Source/Quiz/Quiz/Release/
+Source/Quiz/Release/

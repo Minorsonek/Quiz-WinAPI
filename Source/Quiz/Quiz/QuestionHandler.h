@@ -1,7 +1,7 @@
-#include "UIElements.h"
 #include <vector>
 #include <fstream>
 #include <string>
+#include <windows.h>
 
 #pragma once
 class QuestionHandler
@@ -13,8 +13,6 @@ private:
 	QuestionHandler(std::string questionsPath, std::string resultsPath);
 
 public:
-
-	UIElements* UI;
 
 	int userScore = -1;
 	int questionsAmount;
@@ -31,7 +29,6 @@ public:
 	std::vector <char> v_rightAnswers;
 	std::vector <char> v_userAnswers;
 	std::vector <int> v_questionPoints;
-
 
 	static QuestionHandler& GetInstance(std::string questionsPath, std::string resultsPath);
 
